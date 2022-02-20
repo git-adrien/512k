@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Under512 By My</title>
-    <link href="./assets/fonts/style.css" rel="stylesheet">
+    <link href="./assets/style/style.css" rel="stylesheet">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.3/custom-elements-es5-adapter.js"></script>
 <body>
 <nav>
     <a href="./index.html">Under512k</a>
@@ -46,6 +47,86 @@ Fusce a nibh condimentum, gravida erat vitae, bibendum nisi. Aliquam massa sapie
 
 Suspendisse quis elementum quam. Donec egestas facilisis convallis. Mauris rutrum, nisl ut laoreet mattis, ligula odio dapibus quam, ut cursus tortor nisl nec est. Sed non ipsum congue, vulputate libero sed, faucibus ante. Donec magna arcu, suscipit tempus condimentum eu, iaculis et nisi. Donec nec mattis dui. Nullam molestie et magna non iaculis. Cras non eros massa. Maecenas vehicula turpis eu diam laoreet cursus.
 </span>
+
+<user-details-card api-url="https://reqres.in/api/users/1"></user-details-card>
+
+<script>
+    / créer une class qui extend HTMLElement
+    class UserDetailsCard extends HTMLElement {
+
+        constructor() {
+            super();
+            // Ajouter un click listener sur notre component
+            this.addEventListener('click', e => {
+                this.toggleDetails();
+            });
+        }
+
+        connectedCallback() {
+            // get current scoop context
+            this.currentDocument = document.currentScript.ownerDocument;
+            // Création d'une racine fantôme
+            const shadowRoot = this.attachShadow({mode: 'open'});
+            // creation du template de base avec une class css pour l'identifié par la suite
+            const template = this.currentDocument.createElement('div');
+            template.setAttribute('class', 'card__preview');
+            // on genere une instance uniqu
+            const instance = template.cloneNode(true);
+            // et on l'ajout au ShadowDom
+            shadowRoot.appendChild(instance);
+            // pour finir on peu charger les info user
+            this.loadUserData();
+        }
+
+        async loadUserData() {
+            // on check si l'attribut `api-url` à bien été renseigné
+            if(!this.hasAttribute('api-url'))
+                throw new Error('Vous devez implementer le paramettre `api-url` pour faire fonctionner ce component');
+            // si oui on récupère l'url et on lance la requête
+            const apiUrl = this.getAttribute('api-url');
+            // request api to get data
+            const {data: user} = await fetch(apiUrl)
+                .then(res => res.json())
+                .catch((error) => {
+                    console.error(error);
+                });
+            // pui on update de ShadowDOM
+            this.render(user);
+        }
+
+        render(user) {
+            // on identifi l'element html à modifier
+            const card__preview = this.shadowRoot.querySelector('.card__preview');
+            // on ajoute de cpntenu HTML avec les info en provenance de l'api
+            card__preview.insertAdjacentHTML('afterbegin', `
+      <img class=card__img" src="${user.avatar}">
+      <p class="card__details">
+        ${user.email}<br/>
+        ${user.first_name} ${user.last_name}
+      </p>
+    `);
+            // on cache le details content
+            const card__details = this.shadowRoot.querySelector('.card__details');
+            card__details.style.display = 'none';
+        }
+
+        toggleDetails() {
+            // on identifi la zone à traiter
+            const card__details = this.shadowRoot.querySelector('.card__details');
+            // get current display mode
+            const display = card__details.style.display;
+            // switch display mode
+            if (display === 'none') {
+                card__details.style.display = 'block';
+            } else {
+                card__details.style.display = 'none';
+            }
+        }
+
+    }
+
+    customElements.define('user-details-card', UserDetailsCard);
+</script>
 
 </body>
 </html>

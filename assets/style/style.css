@@ -4,10 +4,10 @@
     font-stretch: normal;
     font-style: normal;
     font-weight: normal;
-    src: url('./assets/fonts/Gulax-Regular.woff') format('woff'),
-    url('./assets/fonts/Gulax-Regular.woff2') format('woff2');
+    src: url('../../assets/fonts/Gulax-Regular.woff') format('woff'),
+    url('../../assets/fonts/Gulax-Regular.woff2') format('woff2');
 }
 
-span {
-    font-family: "gulax", arial;
+h1,h2 {
+    font-family: 'gulax', arial;
 }
