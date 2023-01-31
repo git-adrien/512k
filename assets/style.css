@@ -1,0 +1,54 @@
+@font-face {
+    font-display: swap;
+    font-family: 'jost';
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../assets/Jost-SemiBold.woff2') format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    --w : calc(100vw/12);
+    --h : calc(100vh/24)
+
+}
+
+/* Setup */
+h1 {
+    font-family: 'jost', arial;
+    font-size: 40em;
+    margin: 0;
+}
+
+/* NavBar */
+
+nav {
+display: flex;
+justify-content: space-between;
+margin: var(--h) var(--w);
+}
+nav a{
+    text-decoration: none;
+    color: black;
+    font-size: 2em;
+}
+
+nav a:last-child {
+    border: 2px solid black;
+    padding: 5px 15px;
+    border-radius:50px;
+}
+nav a:last-child:hover {
+    color: white;
+    background: black;
+}
+
+
+/* section */
+
+section {
+    margin: 0 var(--w);
+}
