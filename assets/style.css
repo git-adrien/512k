@@ -1,1 +1,77 @@
-@font-face{font-family: 'jost'; src: url('../assets/Jost-SemiBold.woff2') format('woff2');}*{margin: 0; padding: 0; --w : calc( 100vw/12 + (13 * 24px)/12); --h : calc(100vh/24)}a{text-decoration: none; color: #000;}/* Setup */h1{font-family: 'jost', arial; font-size: clamp(5rem, 4vw + 25rem, 45rem); margin: 0;}/* NavBar */nav{display: flex;justify-content: space-between;margin: var(--h) var(--w);}nav a{font-size: clamp(3rem, 4vw + 2rem, 5rem);}nav a:last-child{border: 2px solid black; padding: 5px 1em; border-radius:50px;}nav a:last-child:hover{color: white; background: black;}/* section */section,header,footer{margin: 0 var(--w);}/* Footer */footer h1{font-size:clamp(5rem, 4vw + 18rem, 30rem); ;}
+@font-face {
+    font-family: 'jost';
+    src: url('../assets/Jost-SemiBold.woff2') format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    --w : calc( 100vw/12 + (11 * 16px)/12);
+    --h : calc(100vh/16);
+
+    --green : rgba(43, 255, 145, 0.85);
+    --pink : rgba(239, 143, 221, 0.75);
+    --blue : rgba(87, 199, 245, 0.75);
+    --yellow : rgba(255, 217, 0, 0.75)
+
+}
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Setup */
+h1 {
+    font-family: 'jost', arial;
+    font-size: clamp(5rem, 4vw + 25rem, 45rem);
+    margin: 0;
+}
+
+/* NavBar */
+nav {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    margin: 36px;
+}
+
+nav div > span {
+    font-family: 'jost', arial;
+    font-size: clamp(75px, 184px, 230px);
+    position: fixed;
+    top: -0.45em;
+    left: -0.6em;
+}
+nav div > span:first-child {
+    color: var(--green);
+
+}
+nav div > span:last-child {
+    color: var(--pink);
+    transform: rotate(-15deg);
+}
+
+nav > a:last-child {
+    position: fixed;
+    right: 36px;
+    font-size: clamp(3rem, 4vw + 2rem, 5rem);
+    border: 2px solid black;
+    padding: 5px 1em;
+    border-radius:50px;
+}
+nav > a:last-child:hover {
+    color: white;
+    background: black;
+}
+
+/* section */
+section,footer {
+    margin: 0 36px;
+}
+
+/* Footer */
+
+footer h1 {
+    font-size:clamp(5rem, 4vw + 18rem, 30rem); ;
+}
